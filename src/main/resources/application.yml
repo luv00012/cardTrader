@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://ep-dawn-dawn-a211dizv.eu-central-1.aws.neon.tech/playerCardsStorage?user=playerCardsStorage_owner&password=Ay3Z7CoBVmza&sslmode=require
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    generate-ddl: true
+    show-sql: true
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+  mvc:
+    async:
+      request-timeout: 3600000
+  server:
+    port: 5432

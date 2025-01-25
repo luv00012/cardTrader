@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CardTraderApplication<cardTrader>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.cardTrader.cardTrader.CardTraderApplication",
+            "projectName": "cardTrader",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
