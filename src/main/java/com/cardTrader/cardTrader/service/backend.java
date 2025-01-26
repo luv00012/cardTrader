@@ -620,31 +620,116 @@ public class backend {
                 && !match.path("Yellow Cards").isMissingNode() && !match.path("Yellow Cards").isNull()
                 && !match.path("Red Cards").isMissingNode() && !match.path("Red Cards").isNull()) {
 
+                    String awayGoals = match.path("Goals").asText();
+                    String awayPossession = match.path("Possession").asText();
+                    String awayPasses = match.path("Passes").asText();
+                    String awayAssists = match.path("Assists").asText();
+                    String awayShots = match.path("Shots").asText();
+                    String awayTackles = match.path("Tackles").asText();
+                    String awayInterceptions = match.path("Interceptions").asText();
+
+                    String awayFoulsOffsides = match.path("Fouls / Offsides").asText();
+                    String[] values = awayFoulsOffsides.split("\\s*/\\s*");
+                    String awayFouls = values[0];
+                    String awayOffsides = values[1];
+
+                    String awayFK = match.path("Free Kicks").asText();
+                    String awayPenalties = match.path("Penalties").asText();
+                    String awayGK = match.path("Goal Kicks").asText();
+                    String awayCK = match.path("Corner Kicks").asText();
+                    String awayTI = match.path("Throw Ins").asText();
+                    String awayYellows = match.path("Yellow Cards").asText();
+                    String awayReds = match.path("Red Cards").asText();
+
                     }
 
-            if (!match.path("Goals").isMissingNode() && !match.path("Goals").isNull()
-                && !match.path("Possession").isMissingNode() && !match.path("Possession").isNull()
-                && !match.path("Passes").isMissingNode() && !match.path("Passes").isNull()
-                && !match.path("Assists").isMissingNode() && !match.path("Assists").isNull()
-                && !match.path("Shots").isMissingNode() && !match.path("Shots").isNull()
-                && !match.path("Tackles").isMissingNode() && !match.path("Tackles").isNull()
-                && !match.path("Interceptions").isMissingNode() && !match.path("Interceptions").isNull()
-                && !match.path("Fouls / Offsides").isMissingNode() && !match.path("Fouls / Offsides").isNull()
-                && !match.path("Free Kicks").isMissingNode() && !match.path("Free Kicks").isNull()
-                && !match.path("Penalties").isMissingNode() && !match.path("Penalties").isNull()
-                && !match.path("Goal Kicks").isMissingNode() && !match.path("Goal Kicks").isNull()
-                && !match.path("Corner Kicks").isMissingNode() && !match.path("Corner Kicks").isNull()
-                && !match.path("Throw Ins").isMissingNode() && !match.path("Throw Ins").isNull()
-                && !match.path("Yellow Cards").isMissingNode() && !match.path("Yellow Cards").isNull()
-                && !match.path("Red Cards").isMissingNode() && !match.path("Red Cards").isNull()) {
-    
+            if (!match2.path("Goals").isMissingNode() && !match2.path("Goals").isNull()
+                && !match2.path("Possession").isMissingNode() && !match2.path("Possession").isNull()
+                && !match2.path("Passes").isMissingNode() && !match2.path("Passes").isNull()
+                && !match2.path("Assists").isMissingNode() && !match2.path("Assists").isNull()
+                && !match2.path("Shots").isMissingNode() && !match2.path("Shots").isNull()
+                && !match2.path("Tackles").isMissingNode() && !match2.path("Tackles").isNull()
+                && !match2.path("Interceptions").isMissingNode() && !match2.path("Interceptions").isNull()
+                && !match2.path("Fouls / Offsides").isMissingNode() && !match2.path("Fouls / Offsides").isNull()
+                && !match2.path("Free Kicks").isMissingNode() && !match2.path("Free Kicks").isNull()
+                && !match2.path("Penalties").isMissingNode() && !match2.path("Penalties").isNull()
+                && !match2.path("Goal Kicks").isMissingNode() && !match2.path("Goal Kicks").isNull()
+                && !match2.path("Corner Kicks").isMissingNode() && !match2.path("Corner Kicks").isNull()
+                && !match2.path("Throw Ins").isMissingNode() && !match2.path("Throw Ins").isNull()
+                && !match2.path("Yellow Cards").isMissingNode() && !match2.path("Yellow Cards").isNull()
+                && !match2.path("Red Cards").isMissingNode() && !match2.path("Red Cards").isNull()) {
+   
+                    String homeGoals = match2.path("Goals").asText();
+                    String homePossession = match2.path("Possession").asText();
+                    String homePasses = match2.path("Passes").asText();
+                    String homeAssists = match2.path("Assists").asText();
+                    String homeShots = match2.path("Shots").asText();
+                    String homeTackles = match2.path("Tackles").asText();
+                    String homeInterceptions = match2.path("Interceptions").asText();
+
+                    String homeFoulsOffsides = match2.path("Fouls / Offsides").asText();
+                    String[] values = homeFoulsOffsides.split("\\s*/\\s*");
+                    String homeFouls = values[0];
+                    String homeOffsides = values[1];
+
+                    String homeFK = match2.path("Free Kicks").asText();
+                    String homePenalties = match2.path("Penalties").asText();
+                    String homeGK = match2.path("Goal Kicks").asText();
+                    String homeCK = match2.path("Corner Kicks").asText();
+                    String homeTI = match2.path("Throw Ins").asText();
+                    String homeYellows = match2.path("Yellow Cards").asText();
+                    String homeReds = match2.path("Red Cards").asText();
+
                         }
             } catch (Exception e) {
                 System.err.println("Something went wrong with the getMatchStats6v6");
         }   
      }
 
-    //public void getPlayerMatchStatsByMatchID
+    public void getPlayerMatchStatsByMatchID(Document doc, Long MatchId) {
+        try {
+            String jsonString = doc.body().text();
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode root = mapper.readTree(jsonString);
+            JsonNode stats = root.path("playerStats");
+            
+            if (!stats.path("matchId").isMissingNode() && !stats.path("matchId").isNull()
+                && !stats.path("homeAway").isMissingNode() && !stats.path("homeAway").isNull()
+                && !stats.path("team").isMissingNode() && !stats.path("team").isNull()
+                && !stats.path("pos").isMissingNode() && !stats.path("pos").isNull()
+                && !stats.path("name").isMissingNode() && !stats.path("name").isNull()
+                && !stats.path("Score").isMissingNode() && !stats.path("Score").isNull()
+                && !stats.path("Passes").isMissingNode() && !stats.path("Passes").isNull()
+                && !stats.path("Assists").isMissingNode() && !stats.path("Assists").isNull()
+                && !stats.path("Shots").isMissingNode() && !stats.path("Shots").isNull()
+                && !stats.path("Goals").isMissingNode() && !stats.path("Goals").isNull()
+                && !stats.path("Tackles").isMissingNode() && !stats.path("Tackles").isNull()
+                && !stats.path("Interceptions").isMissingNode() && !stats.path("Interceptions").isNull()
+                && !stats.path("GK Catches").isMissingNode() && !stats.path("GK Catches").isNull()
+                && !stats.path("GK Saves").isMissingNode() && !stats.path("GK Saves").isNull()
+                && !stats.path("id").isMissingNode() && !stats.path("id").isNull()){
+
+                    String matchId = stats.path("matchId").asText();
+                    String homeAway = stats.path("homeAway").asText();
+                    String team = stats.path("team").asText();
+                    String pos = stats.path("pos").asText();
+                    String name = stats.path("name").asText();
+                    String Score = stats.path("Score").asText();
+                    String homePassesReds = stats.path("Passes").asText();
+                    String Assists = stats.path("Assists").asText();
+                    String Shots = stats.path("Shots").asText();
+                    String Goals = stats.path("Goals").asText();
+                    String Tackles = stats.path("Tackles").asText();
+                    String Interceptions = stats.path("Interceptions").asText();
+                    String GKC = stats.path("GK Catches").asText();
+                    String GKS = stats.path("GK Saves").asText();
+                    String playerId = stats.path("id").asText();
+                }
+            
+        } catch (Exception e) {
+            System.out.println("Something went wrong with the getPlayerMatchStatsByMatchID");
+        }
+    }
 
     public void initializeBackend(){
         getTeamsID();

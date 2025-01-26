@@ -1,5 +1,6 @@
 package com.cardTrader.cardTrader.controller;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -145,6 +146,34 @@ public class controllerClass {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
+
+    @PostMapping("/StartBackend")
+        public ResponseEntity<String> startBackend() {
+            try {
+                Backend.initializeBackend();
+                return ResponseEntity.status(HttpStatus.OK).body("Initialized the Backend");
+            } catch (Exception e) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Couldn't initialize the Backend");
+        }
+    }
+
+    @PostMapping("/scrapeMatchDataToCSV/{Password}")
+        public ResponseEntity<String> postMethodName(@PathVariable String Password) {
+            if(Password.equals("LUCAMAX")) {
+                try {
+                    ArrayList<Long> playerIDs = new ArrayList<>(Backend.readPlayerIdsFromCSV("C:\\Projects\\cardTrader\\cardTrader\\src\\main\\java\\com\\cardTrader\\cardTrader\\CSVFiles\\cardData.csv"));
+                    for (long player : playerIDs) {
+                        HashSet<Long> MatchIDs = new HashSet<>(Backend.getPlayerMatchStatsAndIds(player));
+                        Backend.addMatchInfoToCSV(MatchIDs);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Something went wrong in the backend");
+                }
+            }
+            
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Wrong Password");
+        }
+            
 }
     
     
